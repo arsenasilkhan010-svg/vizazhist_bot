@@ -1,16 +1,34 @@
 import telebot
 from telebot import types
+from flask import Flask
+from threading import Thread
 
 # Ваш токен от BotFather
 TOKEN = '8979608664:AAGTTtJNxs5zfYWMHnI896kv8J9DhM_POl8'
 
-# ⚠️ ВНИМАНИЕ: Замените нолики на ваш числовой Telegram ID (узнать его можно у @userinfobot)
-ADMIN_ID = 8979608664
+# ⚠️ ВНИМАНИЕ: Замените на ваш числовой Telegram ID от @userinfobot
+ADMIN_ID = 8979608664  
+
 bot = telebot.TeleBot(TOKEN)
 
 # Данные Kaspi
 KASPI_PHONE = "+7 777 557 81 03"
 KASPI_NAME = "Гаухар А."
+
+# --- МИНИ-СЕРВЕР ДЛЯ БЕСПЛАТНОГО RENDER ---
+app = Flask('')
+
+@app.route('/')
+def home():
+    return "Bot is running!"
+
+def run():
+    app.run(host='0.0.0.0', port=8080)
+
+def keep_alive():
+    t = Thread(target=run)
+    t.start()
+# ------------------------------------------
 
 @bot.message_handler(commands=['start'])
 def send_welcome(message):
@@ -52,7 +70,7 @@ def callback_tariff(call):
 
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
-    if ADMIN_ID == 000000000:
+    if ADMIN_ID == 123456789:
         bot.reply_to(message, "Ошибка: администратор не настроен в коде бота.")
         return
     
@@ -74,5 +92,6 @@ def handle_all_text(message):
     bot.reply_to(message, "Пожалуйста, выберите тариф с помощью команды /start или отправьте скриншот чека в виде фото после оплаты.")
 
 if __name__ == '__main__':
+    keep_alive()  # Запускаем мини-сервер для удержания бота в сети
     print("Бот успешно запущен и ждет сообщения...")
     bot.infinity_polling()
