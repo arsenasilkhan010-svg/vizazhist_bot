@@ -4,10 +4,10 @@ from flask import Flask
 from threading import Thread
 
 # Ваш токен от BotFather
-TOKEN = '8979608664:AAGTTtJNxs5zfYWMHnI896kv8J9DhM_POl8'
+TOKEN = '8807536364:AAGPhdx4HudENst-WoiLjQmv98kW-pEJRK4'
 
 # ⚠️ ВНИМАНИЕ: Замените на ваш числовой Telegram ID от @userinfobot
-ADMIN_ID = 8979608664  
+ADMIN_ID = 940427510  
 
 bot = telebot.TeleBot(TOKEN)
 
@@ -70,7 +70,7 @@ def callback_tariff(call):
 
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
-    if ADMIN_ID == 123456789:
+    if ADMIN_ID == 940427510:
         bot.reply_to(message, "Ошибка: администратор не настроен в коде бота.")
         return
     
