@@ -70,10 +70,6 @@ def callback_tariff(call):
 
 @bot.message_handler(content_types=['photo'])
 def handle_photo(message):
-    if ADMIN_ID == 940427510:
-        bot.reply_to(message, "Ошибка: администратор не настроен в коде бота.")
-        return
-    
     user = message.from_user
     user_info = (
         f"📩 **Новый чек от ученицы!**\n"
@@ -82,11 +78,11 @@ def handle_photo(message):
         f"• ID: `{user.id}`"
     )
     
+    # Пересылаем информацию и саму фотографию чека вам в личку
     bot.send_message(ADMIN_ID, user_info, parse_mode="Markdown")
     bot.forward_message(ADMIN_ID, message.chat.id, message.message_id)
     
     bot.reply_to(message, "✅ Ваш чек успешно отправлен на проверку! Мы проверим оплату и свяжемся с вами.")
-
 @bot.message_handler(func=lambda message: True)
 def handle_all_text(message):
     bot.reply_to(message, "Пожалуйста, выберите тариф с помощью команды /start или отправьте скриншот чека в виде фото после оплаты.")
