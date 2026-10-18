@@ -7,7 +7,7 @@ from threading import Thread
 TOKEN = '8807536364:AAGPhdx4HudENst-WoiLjQmv98kW-pEJRK4'
 
 # ⚠️ ВНИМАНИЕ: Замените на ваш числовой Telegram ID от @userinfobot
-ADMIN_ID = 940427510  
+ADMIN_ID = 940427510
 
 bot = telebot.TeleBot(TOKEN)
 
